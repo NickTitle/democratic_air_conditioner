@@ -1,0 +1,66 @@
+!!!
+%html
+  %head
+    %meta{ :name => 'viewport', :content => 'width=device-width, initial-scale=1.0'}
+    %link{:href=>"//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css", :rel=>"stylesheet"}
+    %script{:src=>"//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"}
+    %title AIR CONTROL
+    
+  %body{:style =>"padding:10px"}
+    %p    
+      %h1 Democratic AC Control
+
+      %p
+        \- Place your vote for current AC status
+        %br 
+        \- Votes are reset (disappear) every three hours
+        %br
+        \- Don't be a dick - vote once, and use your real name
+        %br
+        %i
+        \- (nobody can see what you voted)
+    
+      %p
+        %form{ :action =>"", :method => "post"}
+          %br
+          - if userInfo
+            Welcome back,
+            %input{:name =>"name", :value=>userInfo[0], :type=>"text", :required => true}
+            %p
+            = " I want the AC..."
+            On 
+            %input{:name =>"ac_vote", :value=>"1", :type=>"radio", :checked=>(userInfo[1] == "1")}
+          
+            Off
+            %input{:name =>"ac_vote", :value=>"0", :type=>"radio", :checked=>(userInfo[1] == "0")}
+          - else
+            Please enter your name:
+            %br
+            %input{:name =>"name", :type=>"text", :required => true}
+            %p
+            = " I want the AC..."
+            On 
+            %input{:name =>"ac_vote", :value=>"1", :type=>"radio"}
+          
+            Off
+            %input{:name =>"ac_vote", :value=>"0", :type=>"radio"}
+
+          %br
+          %input{:type => "submit", :value => "Vote", :class => "button"}
+  %br
+  %p
+    %h4
+      = "There are currently #{voteInfo[1]} total votes"
+    - if voteInfo[1]>0
+      %p
+        
+        %br
+        %h4
+          The majority of voters have spoken!
+        %h3
+          = (voteInfo[0]/voteInfo[1] > 0.5) ? "The AC stays on" : "The AC stays off"
+      %p
+        %i Current Voters are...
+        -voteInfo[2].each do |voter|
+          %br
+          = "- #{voter}"
