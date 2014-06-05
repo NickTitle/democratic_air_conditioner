@@ -1,6 +1,10 @@
 democratic_air_conditioner
 ==========================
 
-simple voting app built in sinatra - we use it to vote on the AC!
+simple voting app built in sinatra!
+It associates each new session with a user name and throws out votes every three hours.
+Have fun with it!
 
-[Imgur](http://i.imgur.com/MfCdxmh.png)
+-Nick
+
+![Image](http://i.imgur.com/MfCdxmh.png&raw=png)
